@@ -1,0 +1,7 @@
+.nav-bar-list {
+    list-style: none;
+    display: flex;
+    justify-content: end;
+    margin-top: 5%;
+    margin-right: 5%;
+}

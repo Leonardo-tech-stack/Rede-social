@@ -1,0 +1,43 @@
+<main>
+  <div class="container p-5">
+
+    <!-- Tela de carregamento do bootstrap -->
+    <div class="spinner-border" role="status" *ngIf="isLoading">
+      <span class="sr-only"></span>
+    </div>
+  
+    <!-- Caso retorne erro imprime isso -->
+    <div *ngIf="loadingError">
+      <h2>Deu erro</h2>
+      <!-- <button (click)="loadProducts()">Tentar novamente</button> -->
+    </div>
+  
+    <div *ngIf="!isLoading && !loadingError && posts.length > 0">
+      <div class="row justify-content-center align-items-center">
+        <div class="col-md-6">
+          <div class="mx-auto"> 
+            <div class="card my-5" *ngFor="let post of posts">
+              <div class="card-body">
+                <div class="d-flex justify-content-start align-items-center">
+                  <img class="avatar" src="../../../assets/images/avatar.jpg">
+                  <h4 *ngIf="users[post.userId]">{{ users[post.userId].name }}</h4>
+                </div>
+                <h6 class="card-title">{{ post.title | capitalizeFirstLetter }}</h6>
+                <p class="card-text">{{ post.body | capitalizeFirstLetter }}</p>
+
+                <div class="d-flex justify-content-start align-items-center">
+                  <button (click)="toggleLike(post)" class="btn btn-link">
+                    <img class="like" [src]="post.liked ? '../../../assets/images/icons8-like-30.png' : '../../../assets/images/icons8-like-24.png'" alt="Curtir">
+                  </button>                 
+                  <span>{{ post.likes }}</span>
+                </div>                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+  </div>
+</main>
