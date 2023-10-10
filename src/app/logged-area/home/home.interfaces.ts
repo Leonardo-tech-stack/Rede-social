@@ -18,11 +18,13 @@ export interface Photos {
 export interface Comment {
     postId: number;
     id: number;
-    // userId: number;
     name: string;
     email: string;
     body: string;
+    likes: number; // Número de likes
+    liked: boolean; // Se o usuário atual curtiu o comentário
 }
+  
   
   
   

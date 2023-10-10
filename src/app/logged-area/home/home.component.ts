@@ -28,6 +28,12 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.loadingPosts();
+    this.comments.forEach(comment => {
+      const liked = localStorage.getItem(`comment_like_${comment.id}`);
+      if (liked === '1') {
+        comment.liked = true;
+      }
+    });
   }
 
   loadingPosts() {
@@ -166,27 +172,42 @@ export class HomeComponent implements OnInit {
         response => {
           this.comments = response.map(comment => ({
             ...comment,
-            name: 'Usuário' 
+            name: 'Usuário', // Substitua pelo nome real do usuário, se necessário
+            likes: 0, // Inicialmente, nenhum like
+            liked: false, // Inicialmente, o usuário não curtiu
           }));
         },
         error => console.error(error)
       );
-  }
+  }  
   
   addNewComment() {
     if (this.newComment.trim() !== '') {
-      const newCommentObj: Comment = {
+      const newComment: Comment = {
         postId: 0,
         id: this.comments.length + 1,
         name: 'Leanne Graham',
         email: 'sincere@april.biz',
         body: this.newComment,
-      };
+        likes: 0, 
+        liked: false, 
+      };      
   
-      this.comments.push(newCommentObj);
-      this.isNewComments.push(true); 
+      this.comments.push(newComment);
   
       this.newComment = '';
+    }
+  }  
+
+  toggleCommentLike(comment: Comment) {
+    comment.liked = !comment.liked;
+  
+    if (comment.liked) {
+      comment.likes++;
+      localStorage.setItem(`comment_like_${comment.id}`, '1');
+    } else {
+      comment.likes--;
+      localStorage.removeItem(`comment_like_${comment.id}`);
     }
   }
   

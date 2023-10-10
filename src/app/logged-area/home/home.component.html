@@ -65,15 +65,21 @@
       </div>
       <div class="modal-body">
         <ul class="list">
-          <li *ngFor="let comment of comments; let i = index">
+          <li class="card mb-4" *ngFor="let comment of comments; let i = index">
             <div class="d-flex justify-content-start align-items-center">
               <img class="avatar" src="../../../assets/images/avatar.jpg">
               <h4><strong>{{ isNewComments[i] ? 'Usuário' : comment.name }}</strong></h4>
             </div>
-            <p>{{ comment.body }}</p>
+            <p class="p-2">{{ comment.body | capitalizeFirstLetter }}</p>
+            
+            <div class="d-flex align-items-center">
+              <button (click)="toggleCommentLike(comment)" class="btn btn-link">
+                <img class="like" [src]="comment.liked ? '../../../assets/images/icons8-like-30.png' : '../../../assets/images/icons8-like-24.png'" alt="Curtir">
+              </button>
+              <span>{{ comment.likes }}</span>
+            </div>
           </li>
-        </ul>
-
+        </ul>        
         <div class="form-group">
           <input type="text" id="newComment"
                  placeholder="Comentar..."
