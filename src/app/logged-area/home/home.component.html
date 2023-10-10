@@ -25,19 +25,62 @@
                 <h6 class="card-title">{{ post.title | capitalizeFirstLetter }}</h6>
                 <p class="card-text">{{ post.body | capitalizeFirstLetter }}</p>
 
-                <div class="d-flex justify-content-start align-items-center">
-                  <button (click)="toggleLike(post)" class="btn btn-link">
-                    <img class="like" [src]="post.liked ? '../../../assets/images/icons8-like-30.png' : '../../../assets/images/icons8-like-24.png'" alt="Curtir">
-                  </button>                 
-                  <span>{{ post.likes }}</span>
-                </div>                
+                <div class="feedback d-flex justify-content-between">
+                  <div class="d-flex align-items-center">
+                    <button (click)="toggleLike(post)" class="btn btn-link">
+                      <img class="like" [src]="post.liked ? '../../../assets/images/icons8-like-30.png' : '../../../assets/images/icons8-like-24.png'" alt="Curtir">
+                    </button>                 
+                    <span>{{ post.likes }}</span>
+                  </div>
+                
+                  <div class="comments">
+                    <button (click)="openCommentsModal(post.id)" class="btn btn-link">Comentar</button>
+                  </div>                                  
+
+                  <div>
+                    <button disabled>
+                      compartilhar
+                    </button>
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    
-    
   </div>
 </main>
+
+<!-- Modal de Comentários -->
+<div class="modal" *ngIf="isCommentsModalOpen" (click)="closeCommentsModal()">
+  <div class="modal-dialog" (click)="stopPropagation($event)">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Comentários</h5>
+        <button type="button" class="close" (click)="closeCommentsModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <ul class="list">
+          <li *ngFor="let comment of comments; let i = index">
+            <div class="d-flex justify-content-start align-items-center">
+              <img class="avatar" src="../../../assets/images/avatar.jpg">
+              <h4><strong>{{ isNewComments[i] ? 'Usuário' : comment.name }}</strong></h4>
+            </div>
+            <p>{{ comment.body }}</p>
+          </li>
+        </ul>
+
+        <div class="form-group">
+          <input type="text" id="newComment"
+                 placeholder="Comentar..."
+                 class="form-control" [(ngModel)]="newComment"
+                 (click)="stopPropagation($event)" (keydown.enter)="addNewComment()">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

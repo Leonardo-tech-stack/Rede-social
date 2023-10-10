@@ -14,4 +14,15 @@ export interface Photos {
     url: string;
     thumbnailUrl: string;
 }
+
+export interface Comment {
+    postId: number;
+    id: number;
+    // userId: number;
+    name: string;
+    email: string;
+    body: string;
+}
+  
+  
   

@@ -1,7 +1,7 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { HomeService } from './home.service';
-import { finalize, take } from 'rxjs';
-import { Posts } from './home.interfaces';
+import { finalize, take } from 'rxjs/operators';
+import { Posts, Comment } from './home.interfaces';
 import User from 'src/app/shared/interfaces/user.interface';
 
 @Component({
@@ -10,56 +10,60 @@ import User from 'src/app/shared/interfaces/user.interface';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+
   posts: Posts[] = [];
-  users: { [key: number]: User } = {}; 
+  users: { [key: number]: User } = {};
+  isCommentsModalOpen = false;
+  comments: Comment[] = [];
+  newComment: string = '';
+  isNewComments: boolean[] = [];
+
+  currentPage = 1;
+  itemsPerPage = 10;
 
   isLoading: boolean = false;
   loadingError: boolean = false;
 
-  constructor(private homeService: HomeService) { }
+  constructor(private homeService: HomeService) {}
 
   ngOnInit() {
     this.loadingPosts();
   }
-  
+
   loadingPosts() {
     this.isLoading = true;
     this.loadingError = false;
-  
+
     this.homeService
-      .getPosts()
+      .getPosts(this.currentPage, this.itemsPerPage)
       .pipe(
         take(1),
         finalize(() => {
           this.posts.forEach(post => {
             const likeKey = `like_${post.id}`;
             const liked = localStorage.getItem(likeKey);
-  
+
             if (liked === '1') {
               post.liked = true;
-              post.likes++; 
+              post.likes++;
             } else {
               post.liked = false;
             }
           });
-  
-          this.isLoading = false; 
+
+          this.isLoading = false;
         })
       )
       .subscribe(
         response => this.onSuccess(response),
         error => this.onError(error),
       );
-  }   
+  }
 
   onSuccess(response: Posts[]) {
-    this.posts = response;
+    const newPosts = response.map(post => ({ ...post, likes: 0 }));
 
-    for (const post of this.posts) {
-      post.likes = 0;
-    }
-
-    for (const post of this.posts) {
+    for (const post of newPosts) {
       if (!this.users[post.userId]) {
         this.homeService.getUserDetails(post.userId)
           .subscribe(
@@ -69,6 +73,7 @@ export class HomeComponent implements OnInit {
       }
     }
 
+    this.posts = [...this.posts, ...newPosts];
     this.shuffleArray(this.posts);
   }
 
@@ -85,19 +90,103 @@ export class HomeComponent implements OnInit {
   }
 
   likePost(post: Posts) {
-    post.likes++; 
-  }  
-  
+    post.likes++;
+  }
+
   toggleLike(post: Posts) {
     post.liked = !post.liked;
-  
+
     const likeKey = `like_${post.id}`;
     if (post.liked) {
       localStorage.setItem(likeKey, '1');
-      post.likes++; 
+      post.likes++;
     } else {
-      localStorage.removeItem(likeKey); 
-      post.likes--; 
+      localStorage.removeItem(likeKey);
+      post.likes--;
+    }
+  }
+
+  @HostListener('window:scroll', ['$event'])
+  onScroll(event: Event): void {
+    const windowHeight = window.innerHeight;
+    const scrollY = window.scrollY || window.pageYOffset;
+    const documentHeight = Math.max(
+      document.body.scrollHeight,
+      document.documentElement.scrollHeight,
+      document.body.offsetHeight,
+      document.documentElement.offsetHeight,
+      document.body.clientHeight,
+      document.documentElement.clientHeight
+    );
+
+    if (windowHeight + scrollY >= documentHeight) {
+      this.loadMorePosts();
+    }
+  }
+
+  loadMorePosts(): void {
+    if (!this.isLoading && !this.loadingError) {
+      const scrollY = window.scrollY || window.pageYOffset;
+
+      this.isLoading = true;
+      this.currentPage++;
+
+      this.homeService.getPosts(this.currentPage, this.itemsPerPage)
+        .pipe(
+          finalize(() => {
+            this.isLoading = false;
+            setTimeout(() => {
+              window.scrollTo(0, scrollY);
+            }, 0);
+          })
+        )
+        .subscribe(
+          response => this.onSuccess(response),
+          error => this.onError(error)
+        );
+    }
+  }
+
+  openCommentsModal(postId: number) {
+    this.loadComments(postId);
+    this.isCommentsModalOpen = true;
+  }
+
+  closeCommentsModal() {
+    this.isCommentsModalOpen = false;
+  }
+  
+  stopPropagation(event: Event) {
+    event.stopPropagation(); 
+  }
+
+  loadComments(postId: number) {
+    this.homeService.getCommentsByPost(postId)
+      .subscribe(
+        response => {
+          this.comments = response.map(comment => ({
+            ...comment,
+            name: 'Usuário' 
+          }));
+        },
+        error => console.error(error)
+      );
+  }
+  
+  addNewComment() {
+    if (this.newComment.trim() !== '') {
+      const newCommentObj: Comment = {
+        postId: 0,
+        id: this.comments.length + 1,
+        name: 'Leanne Graham',
+        email: 'sincere@april.biz',
+        body: this.newComment,
+      };
+  
+      this.comments.push(newCommentObj);
+      this.isNewComments.push(true); 
+  
+      this.newComment = '';
     }
   }
   
