@@ -3,11 +3,15 @@
         <div class="row">
             <div class="col">
                 <ul class="nav-bar-list">
-                    <!-- <li>
-                        <a href="" routerLink="" routerLinkActive="activated">
+                    <li>
+                        <a routerLink="" routerLinkActive="activated">
                             <img class="home" src="../../../../assets/images/home.png">
                         </a>
-                    </li> -->
+                    </li>
+                    <li>
+                        <input type="text" [(ngModel)]="searchText" (input)="onSearchTextChange()" placeholder="Pesquisar por nome do dono">
+                    </li>
+                    
                 </ul>
             </div>
 

@@ -5,6 +5,8 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { CustomPipesModule } from 'src/app/shared/custom-pipes/custom-pipes.module';
 import { FormsModule } from '@angular/forms';
+import { HeaderComponent } from 'src/app/shared/components/header/header.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -15,7 +17,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     HomeRoutingModule,
     CustomPipesModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ]
 })
 export class HomeModule { }

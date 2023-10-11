@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -7,6 +7,9 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
+  @Output() searchTextChanged = new EventEmitter<string>(); 
+
+  searchText: string = '';
 
   constructor(
     private authService: AuthService,
@@ -14,5 +17,9 @@ export class HeaderComponent {
 
   logout() {
     this.authService.logout();
+  }
+
+  onSearchTextChange() {
+    this.searchTextChanged.emit(this.searchText); 
   }
 }

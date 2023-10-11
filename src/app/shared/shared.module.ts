@@ -6,6 +6,7 @@ import { FooterComponent } from './components/footer/footer.component';
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/interceptors.interceptor';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { AuthInterceptor } from './interceptors/interceptors.interceptor';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule, 
+    FormsModule
   ],
   exports: [
     HeaderComponent,

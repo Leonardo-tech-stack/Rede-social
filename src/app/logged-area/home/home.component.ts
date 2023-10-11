@@ -21,6 +21,8 @@ export class HomeComponent implements OnInit {
   currentPage = 1;
   itemsPerPage = 10;
 
+  searchText: string = '';
+
   isLoading: boolean = false;
   loadingError: boolean = false;
 
@@ -211,5 +213,15 @@ export class HomeComponent implements OnInit {
     }
   }
   
+  filterPosts(searchText: string) {
+    if (searchText) {
+      this.posts = this.posts.filter(post => {
+        const ownerName = this.users[post.userId].name;
+        return ownerName.toLowerCase().includes(searchText.toLowerCase());
+      });
+    } else {
+      this.loadingPosts();
+    }
+  }
   
 }
