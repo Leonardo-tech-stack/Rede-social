@@ -1,5 +1,6 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +14,22 @@ export class HeaderComponent {
 
   constructor(
     private authService: AuthService,
+    private router: Router
   ) { }
+
+  scrollToTop() {
+    window.scroll(0, 0);
+  }
+
+  redirectToHome() {
+    if (this.router.url === '/') {
+      this.router.navigate(['/'], { skipLocationChange: true }).then(() => {
+        this.router.navigate(['/']);
+      });
+    } else {
+      this.router.navigate(['/']);
+    }
+  }
 
   logout() {
     this.authService.logout();

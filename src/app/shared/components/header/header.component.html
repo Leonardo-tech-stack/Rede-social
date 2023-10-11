@@ -4,14 +4,13 @@
             <div class="col">
                 <ul class="nav-bar-list">
                     <li>
-                        <a routerLink="" routerLinkActive="activated">
+                        <a (click)="redirectToHome(); scrollToTop()" routerLink="/" routerLinkActive="activated">
                             <img class="home" src="../../../../assets/images/home.png">
                         </a>
-                    </li>
+                    </li>                    
                     <li>
                         <input type="text" [(ngModel)]="searchText" (input)="onSearchTextChange()" placeholder="Pesquisar por nome do dono">
                     </li>
-                    
                 </ul>
             </div>
 
