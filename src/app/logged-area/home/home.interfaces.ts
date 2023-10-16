@@ -21,8 +21,8 @@ export interface Comment {
     name: string;
     email: string;
     body: string;
-    likes: number; // Número de likes
-    liked: boolean; // Se o usuário atual curtiu o comentário
+    likes: number; 
+    liked: boolean;
 }
   
   

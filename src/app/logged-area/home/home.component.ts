@@ -174,9 +174,9 @@ export class HomeComponent implements OnInit {
         response => {
           this.comments = response.map(comment => ({
             ...comment,
-            name: 'Usuário', // Substitua pelo nome real do usuário, se necessário
-            likes: 0, // Inicialmente, nenhum like
-            liked: false, // Inicialmente, o usuário não curtiu
+            name: 'Usuário',
+            likes: 0, 
+            liked: false, 
           }));
         },
         error => console.error(error)

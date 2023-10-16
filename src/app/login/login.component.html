@@ -1,11 +1,5 @@
 <div class="text-center">
-
-    <!-- <p>E-mail inválido: {{ form.controls['email'].invalid }}</p>
-
-    <p>E-mail está tocado: {{ form.controls['email'].touched }}</p> -->
-
     <form #form="ngForm" (ngSubmit)="onSubmit(form)" class="form-signin pt-5">
-
         <div class="p-2">
             <input type="email" class="form-control" 
             placeholder="Email" name="email" 
@@ -14,7 +8,6 @@
             #emailInput>
 
             <div *ngIf="showError('email', form)" class="invalid-feedback">E-mail inválido.</div>
-
         </div>
 
         <div class="p-2">
@@ -25,24 +18,19 @@
             #passwordInput>
 
             <p *ngIf="showError('password', form)" class="invalid-feedback">Senha inválida.</p>
-
         </div>
 
         <div>
             <p *ngIf="loginError">Usuário ou senha inválidos</p>
         </div>
-        
+
         <div class="p-2">
-            <button 
-            class="btn btn-lg btn-primary btn-block" type="submit" 
-            [disabled]="isLoading"
-            >
-                Entrar
+            <button class="btn btn-lg btn-primary btn-block" type="submit" [disabled]="isLoading">
+                <span *ngIf="!isLoading">Entrar</span>
+                <div *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status">
+                    <span class="sr-only"></span>
+                </div>
             </button>
         </div>
     </form>
-
-    <div *ngIf="isLoading" class="spinner-border" role="status">
-        <span class="sr-only"></span>
-    </div>
 </div>

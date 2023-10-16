@@ -21,6 +21,10 @@ export class HomeService {
     return this.http.get<Posts[]>(`${this.API_URL}/posts?_start=${startIndex}&_end=${endIndex}`);
   }  
 
+  getPostsByUserId(userId: number) {
+    return this.http.get<Posts[]>(`${this.API_URL}/posts?userId=${userId}`);
+  }  
+
   getUserDetails(userId: number): Observable<User> {
     return this.http.get<User>(`${this.API_URL}/users/${userId}`);
   }

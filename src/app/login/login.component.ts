@@ -13,13 +13,11 @@ export class LoginComponent {
 
   @ViewChild('emailInput', { static: true }) emailInput!: ElementRef;
   @ViewChild('passwordInput', { static: true }) passwordInput!: ElementRef;
-  // usado para validações, no caso o focus que foi usado para focar em um elemento 
-  // (email ou senha) que esteja invalido
-
+  
   email!: string;
   password!: string;
 
-  isLoading!: boolean;
+  isLoading: boolean = false;
 
   loginError = false;
 
@@ -50,9 +48,6 @@ export class LoginComponent {
 
       return;
     }
-
-    console.log(form.value);
-    console.log(this.login);
 
     this.login();
   }

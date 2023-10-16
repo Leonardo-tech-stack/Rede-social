@@ -7,6 +7,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/interceptors.interceptor';
 import { FormsModule } from '@angular/forms';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     RouterModule, 
-    FormsModule
+    FormsModule, 
+    ModalModule.forRoot()
   ],
   exports: [
     HeaderComponent,
