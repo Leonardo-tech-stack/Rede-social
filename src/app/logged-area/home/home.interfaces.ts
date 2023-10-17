@@ -23,6 +23,7 @@ export interface Comment {
     body: string;
     likes: number; 
     liked: boolean;
+    image: string;
 }
   
   

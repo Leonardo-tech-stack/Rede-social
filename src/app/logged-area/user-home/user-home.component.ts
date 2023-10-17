@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { HomeService } from '../home/home.service';
 import { Posts, Comment } from '../home/home.interfaces';
 
 @Component({
   selector: 'app-user-home',
   templateUrl: './user-home.component.html',
-  styleUrls: ['./user-home.component.css']
+  styleUrls: ['./../home/home.component.css']
 })
 export class UserHomeComponent implements OnInit {
+  @ViewChild('commentsModal', { static: false }) commentsModal!: ElementRef;
 
   userPosts: Posts[] = [];
   user: any;
@@ -81,18 +82,32 @@ export class UserHomeComponent implements OnInit {
       const newComment: Comment = {
         postId: 0,
         id: this.comments.length + 1,
-        name: 'Leanne Graham', 
-        email: 'sincere@april.biz', 
+        name: 'Leanne Graham',
+        email: 'sincere@april.biz',
         body: this.newComment,
         likes: 0,
         liked: false,
+        image: '../../../assets/images/User.jpg',
       };
   
       this.comments.push(newComment);
   
       this.newComment = '';
+  
+      // Use setTimeout para rolar para o final após um pequeno atraso
+      setTimeout(() => {
+        this.scrollToEndOfModal();
+      });
     }
-  }  
+  }
+  
+
+  scrollToEndOfModal() {
+    const modalElement = this.commentsModal.nativeElement;
+  
+    // Role para o final do modal
+    modalElement.scrollTop = modalElement.scrollHeight;
+  }
 
   toggleCommentLike(comment: Comment) {
     comment.liked = !comment.liked;

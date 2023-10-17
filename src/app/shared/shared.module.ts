@@ -8,12 +8,14 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/interceptors.interceptor';
 import { FormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { ModeModalComponent } from './mode-modal/mode-modal.component';
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
     FooterComponent,
+    ModeModalComponent,
   ],
   imports: [
     CommonModule,

@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild, ElementRef } from '@angular/core';
 import { HomeService } from './home.service';
 import { finalize, take } from 'rxjs/operators';
 import { Posts, Comment } from './home.interfaces';
@@ -10,6 +10,7 @@ import User from 'src/app/shared/interfaces/user.interface';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+  @ViewChild('commentsModal', { static: false }) commentsModal!: ElementRef;
 
   posts: Posts[] = [];
   users: { [key: number]: User } = {};
@@ -17,6 +18,7 @@ export class HomeComponent implements OnInit {
   comments: Comment[] = [];
   newComment: string = '';
   isNewComments: boolean[] = [];
+  newImageComment: string = '';
 
   currentPage = 1;
   itemsPerPage = 10;
@@ -191,16 +193,27 @@ export class HomeComponent implements OnInit {
         name: 'Leanne Graham',
         email: 'sincere@april.biz',
         body: this.newComment,
-        likes: 0, 
-        liked: false, 
-      };      
+        likes: 0,
+        liked: false,
+        image: '../../../assets/images/User.jpg',
+      };
   
       this.comments.push(newComment);
   
       this.newComment = '';
+  
+      // Role para o final do modal
+      setTimeout(() => {
+        this.scrollToEndOfModal();
+      });
     }
-  }  
+  }
 
+  scrollToEndOfModal() {
+    const modalElement = this.commentsModal.nativeElement;
+    modalElement.scrollTop = modalElement.scrollHeight;
+  }  
+  
   toggleCommentLike(comment: Comment) {
     comment.liked = !comment.liked;
   
