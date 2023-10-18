@@ -7,7 +7,7 @@
     </div>
   
     <!-- Caso retorne erro imprime isso -->
-    <div *ngIf="loadingError">
+    <div class="mt-4 ml-4" *ngIf="loadingError">
       <h2>Deu erro</h2>
       <!-- <button (click)="loadProducts()">Tentar novamente</button> -->
     </div>
@@ -68,7 +68,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body m-3">
+      <div class="modal-body mb-5">
         <ul class="list">
           <li class="card mb-5" *ngFor="let comment of comments; let i = index">
             <div class="d-flex justify-content-start align-items-center">
@@ -87,12 +87,13 @@
             </div>
           </li>          
         </ul>        
-        <div class="newComment form-group ">
+        <div class="newComment form-group d-flex align-items-center">
+          <img class="img-comment" src="../../../assets/images/User.jpg">
           <input type="text"
                  placeholder="Comentar..."
-                 class="form-control" [(ngModel)]="newComment"
+                 class="form-control m-2" [(ngModel)]="newComment"
                  (click)="stopPropagation($event)" (keydown.enter)="addNewComment()">
-        </div>        
+        </div>               
       </div>
     </div>
   </div>

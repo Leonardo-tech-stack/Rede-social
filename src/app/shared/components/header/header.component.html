@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <ul class="nav-bar-list">
+                <ul class="nav-bar-list d-flex justify-content-end">
                     <li>
                         <a (click)="redirectToHome(); scrollToTop()" routerLink="/" routerLinkActive="activated">
                             <img class="home img-fluid" src="../../../../assets/images/home.png">
@@ -15,8 +15,8 @@
             </div>
 
             <div class="col">
-                <ul class="nav-bar-list">
-                    <li class="d-flex align-items-center">
+                <ul class="nav-bar-list d-flex justify-content-end">
+                    <li class="d-flex align-items-center justify-content-end">
                         <img class="user" src="../../../../assets/images/User.jpg" (click)="openModal()">
                     </li>
                 </ul>

@@ -4,7 +4,7 @@
         <span class="sr-only"></span>
       </div>
   
-      <div *ngIf="loadingError">
+      <div class="mt-4 ml-4" *ngIf="loadingError">
         <h2>Deu erro</h2>
       </div>
   
@@ -60,7 +60,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body m-3" #commentsSection>
+      <div class="modal-body mb-5" #commentsSection>
         <ul class="list" #commentsList>
           <li class="card mb-5" *ngFor="let comment of comments; let i = index">
             <div class="d-flex justify-content-start align-items-center">
@@ -79,12 +79,13 @@
             </div>
           </li>          
         </ul>        
-        <div class="newComment form-group">
-          <input type="text" id="newComment"
+        <div class="newComment form-group d-flex align-items-center">
+          <img class="img-comment" src="../../../assets/images/User.jpg">
+          <input type="text"
                  placeholder="Comentar..."
-                 class="form-control" [(ngModel)]="newComment"
+                 class="form-control m-2" [(ngModel)]="newComment"
                  (click)="stopPropagation($event)" (keydown.enter)="addNewComment()">
-        </div>
+        </div>    
       </div>
     </div>
   </div>
