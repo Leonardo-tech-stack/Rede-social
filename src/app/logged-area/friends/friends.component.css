@@ -1,0 +1,42 @@
+.container {
+    width: 80%;
+    margin-top: 10%;
+    margin-bottom: 5%;
+}
+
+.user-list {
+    margin-left: 15%;
+}
+
+.user-list ul {
+    list-style: none;
+    padding: 0;
+    margin-left: 65%;
+}
+
+.user-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    justify-content: flex-start;
+}
+
+.user-item {
+    display: flex;
+    align-items: center;
+    margin-top: 5%;
+}
+
+.user-avatar {
+    width: 65%;
+    height: auto; 
+}
+
+.user-details {
+    display: flex;
+    align-items: center;
+    width: 97%;
+    font-weight: 500;
+}
+  
+  

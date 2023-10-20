@@ -1,0 +1,22 @@
+main {
+    position: fixed;
+    top: 19%;
+    width: 20%;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    width: 100%;
+    font-weight: 500;
+}
+
+.user-div img {
+    border-radius: 50%;
+}
+
+img {
+    width: 13%;
+    height: auto;
+}
+

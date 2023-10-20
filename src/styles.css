@@ -12,4 +12,15 @@
 
 body {
     margin: 0;
+    background-color: #f4f4f4;
+}
+
+
+.spinner-border {
+    margin: 30% 0;
+    margin-left: 51%;
+}
+
+p, ul {
+    margin-bottom: 0;
 }

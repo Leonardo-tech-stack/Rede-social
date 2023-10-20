@@ -1,0 +1,31 @@
+<main class="">
+    <div class="user-div">
+        <a class="d-flex align-items-center m-3" [routerLink]="userLink">
+            <img src="../../../../assets/images/User.jpg" class="img-fluid" 
+                alt="{{ user.name }}"
+            >
+            <p class="m-3">{{ user.name }} {{ user.surname }}</p>
+        </a>
+    </div>
+
+    <div>
+        <a class="d-flex align-items-center m-3" [routerLink]="friendsLink">
+            <img src="../../../../assets/images/friends.png">
+            <p class="m-3">Encontrar amigos</p>
+        </a>
+    </div>
+
+    <!-- <div>
+        <a class="d-flex align-items-center m-3" routerLink="">
+            <img src="../../../../assets/images/saved.png">
+            <p class="m-3">Salvos</p>
+        </a>
+    </div>
+
+    <div>
+        <a class="d-flex align-items-center m-3" routerLink="">
+            <img src="../../../../assets/images/liked.png">
+           <p class="m-3">Curtidos</p>
+        </a>
+    </div> -->
+</main>

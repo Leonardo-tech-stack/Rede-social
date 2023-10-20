@@ -7,14 +7,6 @@ export interface Posts {
     liked: boolean
 }
 
-export interface Photos {
-    albumId: number;
-    id: number;
-    title: string;
-    url: string;
-    thumbnailUrl: string;
-}
-
 export interface Comment {
     postId: number;
     id: number;
