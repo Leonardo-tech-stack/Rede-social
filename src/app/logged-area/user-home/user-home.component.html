@@ -16,10 +16,10 @@
                 <div class="card-body">
                   <div class="d-flex justify-content-start align-items-center">
                     <img class="avatar" src="../../../assets/images/avatar.jpg">
-                    <h4>{{ user?.name || 'Usuário' }}</h4>
+                    <h4 class="mt-1">{{ user?.name || 'Usuário' }}</h4>
                   </div>
-                  <h6 class="card-title">{{ post.title | capitalizeFirstLetter }}</h6>
-                  <p class="card-text">{{ post.body | capitalizeFirstLetter }}</p>
+                  <h6 class="body card-title">{{ post.title | capitalizeFirstLetter }}</h6>
+                  <p class="body card-text">{{ post.body | capitalizeFirstLetter }}</p>
 
                   <div class="d-flex justify-content-between">
                     <div class="d-flex align-items-center">

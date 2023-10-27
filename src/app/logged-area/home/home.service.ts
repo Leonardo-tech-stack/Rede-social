@@ -21,6 +21,10 @@ export class HomeService {
     return this.http.get<Posts[]>(`${this.API_URL}/posts?_start=${startIndex}&_end=${endIndex}`);
   }  
 
+  getPostById(postId: number): Observable<Posts> {
+    return this.http.get<Posts>(`${this.API_URL}/posts/${postId}`);
+  }
+  
   getPostsByUserId(userId: number) {
     return this.http.get<Posts[]>(`${this.API_URL}/posts?userId=${userId}`);
   }  

@@ -8,6 +8,21 @@ main {
   border-radius: 50%;
 }
 
+.body {
+  margin: 1% 0; 
+  margin-left: 1%;
+}
+
+.ellipsis img {
+  width: 20px;
+}
+
+.ellipsis img:hover {
+  background-color: #b6b4b4;
+  transition: 0.5s;
+  border-radius: 50%;
+}
+
 .like {
   max-width: 100%;
   height: auto;
@@ -52,7 +67,6 @@ main {
 }
 
 .modal-body {
-  /* width: 70%; */
   padding: 20px;
 }
 

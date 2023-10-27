@@ -20,7 +20,10 @@ const routes: Routes = [{
         loadChildren: () => import('./user-home/user-home.module').then(m => m.UserHomeModule),
     }, {
         path: 'friends',
-        loadChildren: () => import('./friends/friends.module').then(m => m.FriendsModule)
+        loadChildren: () => import('./friends/friends.module').then(m => m.FriendsModule),
+    }, {
+        path: 'saved',
+        loadChildren: () => import('./saved/saved.module').then(m => m.SavedModule),
     }]
 }];
 

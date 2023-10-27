@@ -25,6 +25,10 @@ export class HomeComponent implements OnInit {
 
   searchText: string = '';
 
+  savedPosts: Posts[] = [];
+  savedPostsIds: number[] = [];
+  showOptions: boolean[] = [];
+
   isLoading: boolean = false;
   loadingError: boolean = false;
 
@@ -32,6 +36,13 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.loadingPosts();
+    const savedPostsJSON = localStorage.getItem('savedPosts');
+    const savedPostsIdsJSON = localStorage.getItem('savedPostIds');
+  
+    if (savedPostsJSON && savedPostsIdsJSON) {
+      this.savedPosts = JSON.parse(savedPostsJSON);
+      this.savedPostsIds = JSON.parse(savedPostsIdsJSON);
+    }
     this.comments.forEach(comment => {
       const liked = localStorage.getItem(`comment_like_${comment.id}`);
       if (liked === '1') {
@@ -71,7 +82,7 @@ export class HomeComponent implements OnInit {
   }
 
   onSuccess(response: Posts[]) {
-    const newPosts = response.map(post => ({ ...post, likes: 0 }));
+    const newPosts = response.map(post => ({ ...post, likes: 0, showOptions: false }));
 
     for (const post of newPosts) {
       if (!this.users[post.userId]) {
@@ -202,7 +213,6 @@ export class HomeComponent implements OnInit {
   
       this.newComment = '';
   
-      // Role para o final do modal
       setTimeout(() => {
         this.scrollToEndOfModal();
       });
@@ -236,5 +246,28 @@ export class HomeComponent implements OnInit {
       this.loadingPosts();
     }
   }
+
+  openOptions(post: Posts) {
+    post.showOptions = !post.showOptions;
+  }
+
+  savePost(post: Posts) {
+    if (!this.savedPostsIds.includes(post.id)) {
+      this.savedPostsIds.push(post.id);
+      localStorage.setItem('savedPostIds', JSON.stringify(this.savedPostsIds));
+  
+      if (post.liked) {
+        post.liked = true;
+      }
+      this.savedPosts.push(post);
+      localStorage.setItem('savedPosts', JSON.stringify(this.savedPosts));
+    }
+  }  
+
+  isPostSaved(post: Posts): boolean {
+    return this.savedPostsIds.includes(post.id);
+  }
+  
+  
 
 }

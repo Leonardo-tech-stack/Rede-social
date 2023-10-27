@@ -1,23 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { HomeRoutingModule } from './home-routing.module';
-import { HomeComponent } from './home.component';
-import { CustomPipesModule } from 'src/app/shared/custom-pipes/custom-pipes.module';
+import { SavedRoutingModule } from './saved-routing.module';
+import { SavedComponent } from './saved.component';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
   declarations: [
-    HomeComponent,
+    SavedComponent,
   ],
   imports: [
     CommonModule,
-    HomeRoutingModule,
-    CustomPipesModule,
+    SavedRoutingModule, 
     FormsModule,
     SharedModule
   ]
 })
-export class HomeModule { }
+export class SavedModule { }

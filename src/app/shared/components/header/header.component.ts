@@ -20,12 +20,18 @@ export class HeaderComponent {
 
   userName: string = 'Leanne Graham';
 
+  showSearchInput: boolean = false;
+
   constructor(
     private authService: AuthService,
     private router: Router,
     private modalService: BsModalService,
-  private el: ElementRef
-  ) { }
+    private el: ElementRef
+  ) { 
+    this.router.events.subscribe(() => {
+      this.showSearchInput = this.router.url === '/home';
+    });
+  }
 
   ngOnInit() {
     document.addEventListener('click', this.handleDocumentClick.bind(this));

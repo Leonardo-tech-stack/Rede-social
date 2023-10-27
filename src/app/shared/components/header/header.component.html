@@ -4,14 +4,14 @@
             <div class="col">
                 <ul class="nav-bar-list d-flex justify-content-end">
                     <li>
-                        <a (click)="redirectToHome(); scrollToTop()" routerLink="/" routerLinkActive="activated">
-                            <img class="home img-fluid" src="../../../../assets/images/home.png">
-                        </a>
+                      <a (click)="redirectToHome(); scrollToTop()" routerLink="/" routerLinkActive="activated">
+                        <img class="home img-fluid" [ngClass]="{'no-input': !showSearchInput}" src="../../../../assets/images/home.png">
+                      </a>
                     </li>
-                    <li class="d-flex align-items-center">
-                        <input type="text" [(ngModel)]="searchText" (input)="onSearchTextChange()" placeholder="Pesquisar por nome">
+                    <li class="d-flex align-items-center" *ngIf="showSearchInput">
+                      <input type="text" [(ngModel)]="searchText" (input)="onSearchTextChange()" placeholder="Pesquisar por nome">
                     </li>
-                </ul>
+                  </ul>
             </div>
 
             <div class="col">

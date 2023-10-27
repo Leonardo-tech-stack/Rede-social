@@ -23,6 +23,11 @@ li {
     height: auto;
 }
 
+.no-input {
+    max-width: 19%;
+    height: auto;
+}
+
 ul.nav-bar-list li img.user {
     max-width: 20%;
     height: auto;

@@ -1,6 +1,5 @@
 <main>
   <div class="container p-5">
-
     <!-- Tela de carregamento do bootstrap -->
     <div class="spinner-border" role="status" *ngIf="isLoading">
       <span class="sr-only"></span>
@@ -18,13 +17,25 @@
           <div class="mx-auto"> 
             <div class="card my-5" *ngFor="let post of posts">
               <div class="card-body">
-                <div class="d-flex justify-content-start align-items-center">
-                  <img class="avatar" src="../../../assets/images/avatar.jpg">
-                  <h4 *ngIf="users[post.userId]">{{ users[post.userId].name }}</h4>
-                </div>
-                <h6 class="card-title">{{ post.title | capitalizeFirstLetter }}</h6>
-                <p class="card-text">{{ post.body | capitalizeFirstLetter }}</p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="d-flex align-items-center">
+                    <img class="avatar" src="../../../assets/images/avatar.jpg">
+                    <h4 class="mt-1" *ngIf="users[post.userId]">{{ users[post.userId].name }}</h4>
+                  </div>
 
+                  <div class="ellipsis">
+                    <button class="btn btn-link" (click)="openOptions(post)">
+                      <img src="../../../assets/images/ellipsis.png">
+                    </button>
+                  </div>
+                </div>
+                <div *ngIf="post.showOptions" class="options-menu">
+                  <button (click)="savePost(post)" [disabled]="isPostSaved(post)">
+                    {{ isPostSaved(post) ? 'Post Salvo' : 'Salvar Post' }}
+                  </button>
+                </div>
+                <h6 class="card-title body">{{ post.title | capitalizeFirstLetter }}</h6>
+                <p class="card-text body">{{ post.body | capitalizeFirstLetter }}</p>
                 <div class="d-flex justify-content-between">
                   <div class="d-flex align-items-center">
                     <button (click)="toggleLike(post)" class="like-button btn btn-link">
@@ -34,32 +45,30 @@
                     </button>                 
                     <span>{{ post.likes }}</span>
                   </div>
-                
                   <div class="comments">
                     <button (click)="openCommentsModal(post.id)" class="btn btn-link">
                       <img class="comments-image" src="../../../assets/images/comentar.png">
                       Comentar
                     </button>
                   </div>                                  
-
                   <div>
                     <button disabled>
-                      compartilhar
+                      Compartilhar
                     </button>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    
   </div>
 </main>
 
 <!-- Modal de Comentários -->
-<div class="modal" *ngIf="isCommentsModalOpen" (click)="closeCommentsModal()" #commentsModal>
+<section class="modal" *ngIf="isCommentsModalOpen" (click)="closeCommentsModal()" #commentsModal>
   <div class="modal-dialog" (click)="stopPropagation($event)">
     <div class="modal-content">
       <div class="modal-header">
@@ -76,7 +85,6 @@
               <h4><strong>{{ isNewComments[i] ? 'Usuário' : comment.name }}</strong></h4>
             </div>
             <p class="p-2">{{ comment.body | capitalizeFirstLetter }}</p>
-          
             <div class="d-flex align-items-center">
               <button (click)="toggleCommentLike(comment)" class="btn btn-link">
                 <img class="like" [src]="comment.liked ? '../../../assets/images/icons8-like-30.png' 
@@ -97,5 +105,5 @@
       </div>
     </div>
   </div>
-</div>
+</section>
 <app-header (searchTextChanged)="filterPosts($event)"></app-header>
