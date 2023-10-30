@@ -38,7 +38,10 @@
                 </div>
 
                 <div class="logout">
-                    <button class="btn btn-danger" (click)="logout(); closeModal();">Sair</button>
+                    <button class="btn btn-danger" (click)="logout(); closeModal();">
+                        <img [src]="logoutImg">
+                        Sair
+                    </button>
                 </div>
             </div>
         </div>

@@ -23,14 +23,14 @@ export class Posts {
 }
 
 export interface Comment {
-    postId: number;
-    id: number;
-    name: string;
-    email: string;
-    body: string;
-    likes: number; 
-    liked: boolean;
-    image: string;
+  postId: number;
+  id: number;
+  name: string;
+  email: string;
+  body: string;
+  likes: number; 
+  liked: boolean;
+  image: string;
 }
   
   

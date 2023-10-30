@@ -22,5 +22,6 @@ export class LeftRoutingComponent implements OnInit{
   userLink: string = "/profile"; 
   friendsLink: string = "/friends"; 
   savedLink: string = "/saved"; 
+  likedLink: string = "/liked";
 
 }

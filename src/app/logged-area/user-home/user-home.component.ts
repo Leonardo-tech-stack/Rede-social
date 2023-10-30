@@ -13,6 +13,14 @@ export class UserHomeComponent implements OnInit {
   userPosts: Posts[] = [];
   user: any;
 
+  photo: string = "../../../assets/images/avatar.jpg";
+  ellipsis: string = "../../../assets/images/ellipsis.png";
+  liked: string = "../../../assets/images/icons8-like-30.png";
+  noLiked: string = "../../../assets/images/icons8-like-24.png";
+  comment: string = "../../../assets/images/comentar.png";
+  share: string = "../../../assets/images/share.png";
+  userPhoto: string = "../../../assets/images/User.jpg";
+
   isCommentsModalOpen = false;
   comments: Comment[] = [];
   newComment: string = '';
@@ -94,7 +102,6 @@ export class UserHomeComponent implements OnInit {
   
       this.newComment = '';
   
-      // Use setTimeout para rolar para o final após um pequeno atraso
       setTimeout(() => {
         this.scrollToEndOfModal();
       });
@@ -105,7 +112,6 @@ export class UserHomeComponent implements OnInit {
   scrollToEndOfModal() {
     const modalElement = this.commentsModal.nativeElement;
   
-    // Role para o final do modal
     modalElement.scrollTop = modalElement.scrollHeight;
   }
 

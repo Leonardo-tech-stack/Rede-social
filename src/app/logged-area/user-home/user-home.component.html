@@ -15,32 +15,33 @@
               <div class="card my-5" *ngFor="let post of userPosts">
                 <div class="card-body">
                   <div class="d-flex justify-content-start align-items-center">
-                    <img class="avatar" src="../../../assets/images/avatar.jpg">
+                    <img class="avatar" [src]="photo">
                     <h4 class="mt-1">{{ user?.name || 'Usuário' }}</h4>
                   </div>
                   <h6 class="body card-title">{{ post.title | capitalizeFirstLetter }}</h6>
                   <p class="body card-text">{{ post.body | capitalizeFirstLetter }}</p>
 
-                  <div class="d-flex justify-content-between">
+                  <section class="d-flex justify-content-between">
                     <div class="d-flex align-items-center">
                       <button (click)="toggleLike(post)" class="like-button btn btn-link">
-                        <img class="like" [src]="post.liked ? '../../../assets/images/icons8-like-30.png' 
-                        : '../../../assets/images/icons8-like-24.png'" alt="Curtir">
+                        <img class="like" [src]="post.liked ? liked
+                        : noLiked" alt="Curtir">
                       </button>
                       <span>{{ post.likes }}</span>
                     </div>
                     <div class="comments">
                       <button (click)="openCommentsModal(post.id)" class="btn btn-link">
-                        <img class="comments-image" src="../../../assets/images/comentar.png">
+                        <img class="comments-image" [src]="comment">
                         Comentar
                       </button>
                     </div>
-                    <div>
+                    <div class="share">
                       <button disabled>
-                        compartilhar
+                        <img [src]="share">
+                        Compartilhar
                       </button>
                     </div>
-                  </div>
+                  </section>
                 </div>
               </div>
             </div>
@@ -64,15 +65,15 @@
         <ul class="list" #commentsList>
           <li class="card mb-5" *ngFor="let comment of comments; let i = index">
             <div class="d-flex justify-content-start align-items-center">
-              <img class="avatar m-1" src="{{ comment.image || '../../../assets/images/avatar.jpg' }}">
+              <img class="avatar m-1" src="{{ comment.image || photo }}">
               <h4><strong>{{ isNewComments[i] ? 'Usuário' : comment.name }}</strong></h4>
             </div>
             <p class="p-2">{{ comment.body | capitalizeFirstLetter }}</p>
             
             <div class="d-flex align-items-center">
               <button (click)="toggleCommentLike(comment)" class="btn btn-link">
-                <img class="like" [src]="comment.liked ? '../../../assets/images/icons8-like-30.png' 
-                  : '../../../assets/images/icons8-like-24.png'" alt="Curtir"
+                <img class="like" [src]="comment.liked ? liked 
+                  : noLiked" alt="Curtir"
                 >
               </button>
               <span>{{ comment.likes }}</span>
@@ -80,7 +81,7 @@
           </li>          
         </ul>        
         <div class="newComment form-group d-flex align-items-center">
-          <img class="img-comment" src="../../../assets/images/User.jpg">
+          <img class="img-comment" [src]="userPhoto">
           <input type="text"
                  placeholder="Comentar..."
                  class="form-control m-2" [(ngModel)]="newComment"

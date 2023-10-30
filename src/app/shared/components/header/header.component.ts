@@ -22,6 +22,8 @@ export class HeaderComponent {
 
   showSearchInput: boolean = false;
 
+  logoutImg: string = '../../../../assets/images/logout.png';
+
   constructor(
     private authService: AuthService,
     private router: Router,

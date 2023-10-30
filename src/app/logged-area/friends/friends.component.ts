@@ -12,6 +12,8 @@ export class FriendsComponent implements OnInit {
 
   users: User[] = [];
 
+  photo: string = '../../../assets/images/avatar.jpg';
+
   isLoading: boolean = false;
   loadingError: boolean = false;
 

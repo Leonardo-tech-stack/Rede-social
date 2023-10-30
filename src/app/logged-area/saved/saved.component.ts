@@ -1,5 +1,3 @@
-// saved.component.ts
-
 import { Component, ElementRef, ViewChild, Input, OnInit } from '@angular/core';
 import { Posts, Comment } from '../home/home.interfaces';
 import { HomeService } from '../home/home.service';
@@ -14,9 +12,18 @@ import { forkJoin } from 'rxjs';
 export class SavedComponent implements OnInit {
   @ViewChild('commentsModal', { static: false }) commentsModal!: ElementRef;
   @ViewChild('commentsModalBody') commentsModalBody: ElementRef | undefined;
-
-  savedPosts: Posts[] = [];
   @Input() comments: Comment[] = [];
+  
+  savedPosts: Posts[] = [];
+
+  photo: string = "../../../assets/images/avatar.jpg";
+  ellipsis: string = "../../../assets/images/ellipsis.png";
+  liked: string = "../../../assets/images/icons8-like-30.png";
+  noLiked: string = "../../../assets/images/icons8-like-24.png";
+  comment: string = "../../../assets/images/comentar.png";
+  share: string = "../../../assets/images/share.png";
+  userPhoto: string = "../../../assets/images/User.jpg";
+
   newComment: string = '';
   isCommentsModalOpen = false;
   isSaveButtonVisible: boolean = false;

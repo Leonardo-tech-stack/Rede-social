@@ -14,6 +14,15 @@ export class HomeComponent implements OnInit {
 
   posts: Posts[] = [];
   users: { [key: number]: User } = {};
+
+  photo: string = "../../../assets/images/avatar.jpg";
+  ellipsis: string = "../../../assets/images/ellipsis.png";
+  liked: string = "../../../assets/images/icons8-like-30.png";
+  noLiked: string = "../../../assets/images/icons8-like-24.png";
+  comment: string = "../../../assets/images/comentar.png";
+  share: string = "../../../assets/images/share.png";
+  userPhoto: string = "../../../assets/images/User.jpg";
+  
   isCommentsModalOpen = false;
   comments: Comment[] = [];
   newComment: string = '';

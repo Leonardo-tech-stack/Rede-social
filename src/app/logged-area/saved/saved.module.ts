@@ -5,6 +5,7 @@ import { SavedRoutingModule } from './saved-routing.module';
 import { SavedComponent } from './saved.component';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { CustomPipesModule } from 'src/app/shared/custom-pipes/custom-pipes.module';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
   imports: [
     CommonModule,
     SavedRoutingModule, 
+    CustomPipesModule,
     FormsModule,
     SharedModule
   ]
