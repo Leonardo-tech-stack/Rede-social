@@ -22,7 +22,12 @@ registerLocaleData(localePt, 'pt');
     HttpClientModule,
     BrowserAnimationsModule,
     SharedModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot({
+      timeOut: 3000, 
+      positionClass: 'toast-top-right',
+      preventDuplicates: true, 
+      closeButton: true,
+    }),
   ],
   providers: [{
     provide: LOCALE_ID,

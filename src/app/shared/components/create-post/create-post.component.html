@@ -1,0 +1,21 @@
+<div class="modal-header">
+    <h4 class="modal-title">Criar Nova Postagem</h4>
+</div>
+<div class="modal-body">
+    <form (ngSubmit)="createPost()">
+        <div class="form-group">
+            <label for="title">Título</label>
+            <input type="text" id="title" name="title" [(ngModel)]="newPost.title" required>
+        </div>
+        <div class="form-group">
+            <label for="body">Corpo</label>
+            <textarea id="body" name="body" [(ngModel)]="newPost.body" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Criar Postagem</button>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="closeModal()">Fechar</button>
+</div>
+
+  

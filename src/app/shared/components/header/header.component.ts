@@ -2,6 +2,7 @@ import { Component, Output, EventEmitter, ViewChild, ElementRef } from '@angular
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { CreatePostComponent } from '../create-post/create-post.component';
 
 
 @Component({
@@ -22,6 +23,10 @@ export class HeaderComponent {
 
   showSearchInput: boolean = false;
 
+  home: string = '../../../../assets/images/home.png';
+  friendsNc: string = '../../../../assets/images/friends-nc.png';
+  photo: string = '../../../../assets/images/User.jpg';
+  createPost: string = '../../../../assets/images/create-post.png'; 
   logoutImg: string = '../../../../assets/images/logout.png';
 
   constructor(
@@ -77,6 +82,13 @@ export class HeaderComponent {
     if (!this.el.nativeElement.contains(event.target) && this.modalOpen) {
         this.closeModal();
     }
+  }
+
+  openPostModal() {
+    const initialState = {
+    };
+
+    this.modalRef = this.modalService.show(CreatePostComponent, { initialState });
   }
 
 }

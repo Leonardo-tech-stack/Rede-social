@@ -2,28 +2,46 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <ul class="nav-bar-list d-flex justify-content-end">
-                    <li>
-                      <a (click)="redirectToHome(); scrollToTop()" routerLink="/" routerLinkActive="activated">
-                        <img class="home img-fluid" [ngClass]="{'no-input': !showSearchInput}" src="../../../../assets/images/home.png">
-                      </a>
-                    </li>
-                    <li class="d-flex align-items-center" *ngIf="showSearchInput">
-                      <input type="text" [(ngModel)]="searchText" (input)="onSearchTextChange()" placeholder="Pesquisar por nome">
-                    </li>
-                  </ul>
+                <div class="header-content">
+                    <ul [ngClass]="{'no-input': !showSearchInput}" class="nav-bar-list">
+                        <li>
+                            <a class="home" (click)="redirectToHome(); scrollToTop()" routerLink="/" routerLinkActive="activated">
+                                <img class="img-consistence" [src]="home" alt="Início">
+                            </a>
+                        </li>
+                        <li class="d-flex align-items-center" *ngIf="showSearchInput">
+                            <input type="text" [(ngModel)]="searchText" (input)="onSearchTextChange()" placeholder="Pesquisar por nome">
+                        </li>
+                        <li>
+                            <a class="friends" routerLink="/friends">
+                                <img class="img-consistence" [src]="friendsNc" alt="Amigos">
+                            </a>
+                        </li>  
+                        <li>
+                            <section class="create-post" (click)="openPostModal()" title="Postar">
+                                <img class="img-consistence" [src]="createPost" alt="Criar Postagem">
+                            </section>
+                        </li>
+                        <!-- <li>
+                            <a routerLink="/friends">
+                                <img class="friends img-fluid" [src]="friends" alt="Friends">
+                            </a>
+                        </li>                       -->
+                    </ul>
+                </div>
             </div>
 
             <div class="col">
-                <ul class="nav-bar-list d-flex justify-content-end">
+                <ul class="user-1 nav-bar-list d-flex justify-content-end">
                     <li class="d-flex align-items-center justify-content-end">
-                        <img class="user mb-3" src="../../../../assets/images/User.jpg" (click)="openModal()">
+                        <img class="user" [src]="photo" (click)="openModal()" [alt]="userName">
                     </li>
                 </ul>
             </div>
         </div>
     </div>
 </header>
+
 
 <!-- Modal -->
 <div class="custom-modal" [ngClass]="{ 'open': modalOpen }">
@@ -32,7 +50,7 @@
             <div class="d-flex flex-column">
                 <div class="user-div">
                     <a class="d-flex flex-row mb-3" routerLink="/profile">
-                        <img class="user" src="../../../../assets/images/User.jpg">
+                        <img class="user" [src]="photo">
                         <h4 class="d-flex align-items-center m-4">{{ userName }}</h4>
                     </a>
                 </div>

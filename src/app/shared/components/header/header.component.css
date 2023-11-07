@@ -2,40 +2,75 @@ header {
     background-color: white;
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
     z-index: 998;
+    padding: 1%;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .nav-bar-list {
     list-style: none;
-    margin-top: 6%;
-    margin-right: 5%;
+    display: flex;
+    align-items: center;
+    margin: 0; 
 }
 
 ul {
-    width: 70%;
+    margin: 0; 
+    padding: 0; 
+    display: flex;
+    align-items: center;
 }
 
 li {
-    margin-bottom: 1%;
+    margin-left: 50px;
 }
 
-.home {
-    max-width: 35%;
+a {
+    cursor: pointer;
+}
+
+.img-consistence {
+    max-width: 55px; 
     height: auto;
 }
 
-.no-input {
-    max-width: 19%;
-    height: auto;
+.friends {
+
 }
 
-ul.nav-bar-list li img.user {
-    max-width: 20%;
+.create-post {
+    cursor: pointer;
+}
+
+.user {
+    max-width: 55px;
     height: auto;
     border-radius: 50%;
 }
 
-ul.nav-bar-list li img.user:hover {
+.user:hover {
     cursor: pointer;
+}
+
+input[type="text"] {
+    width: 17rem; 
+    height: 2.50rem;
+    border-radius: 50px;
+    font-size: 1.3rem;
+    padding-left: 15px;
+}
+
+.no-input {
+    max-width: 19px; 
+    height: auto;
+}
+
+.no-input {
+    max-width: 55px; 
 }
 
 .custom-modal {
@@ -43,7 +78,7 @@ ul.nav-bar-list li img.user:hover {
     position: absolute;
     width: 40%;
     top: 15%;
-    right: 15%;
+    right: 5%;
     background: #fff;
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
     z-index: 999;
@@ -104,7 +139,7 @@ a img.user {
 
 .logout {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 }
 

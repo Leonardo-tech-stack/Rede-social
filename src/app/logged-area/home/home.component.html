@@ -1,14 +1,11 @@
 <main>
   <div class="container p-5">
-    <!-- Tela de carregamento do bootstrap -->
     <div class="spinner-border" role="status" *ngIf="isLoading">
       <span class="sr-only"></span>
     </div>
   
-    <!-- Caso retorne erro imprime isso -->
     <div class="mt-4 ml-4" *ngIf="loadingError">
       <h2>Deu erro</h2>
-      <!-- <button (click)="loadProducts()">Tentar novamente</button> -->
     </div>
   
     <div *ngIf="!isLoading && !loadingError && posts.length > 0">

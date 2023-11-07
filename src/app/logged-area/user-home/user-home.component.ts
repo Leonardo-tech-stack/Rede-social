@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { HomeService } from '../home/home.service';
 import { Posts, Comment } from '../home/home.interfaces';
+import { PostService } from 'src/app/shared/services/post-service/post-service.service';
 
 @Component({
   selector: 'app-user-home',
@@ -30,28 +31,31 @@ export class UserHomeComponent implements OnInit {
   users: any = {};
   isNewComments: boolean[] = [];
 
-  constructor(private homeService: HomeService) {}
+  constructor(
+    private homeService: HomeService,
+    private postService: PostService
+  ) {}
 
   ngOnInit() {
-    this.isLoading = true; 
+    this.isLoading = true;
 
     this.homeService.getUserDetails(1).subscribe(
       (user) => {
         this.user = user;
 
-        this.homeService.getPostsByUserId(1).subscribe(
+        this.postService.getPostsByUserId(1).subscribe(
           (posts) => {
             this.userPosts = posts.map(post => ({
               ...post,
               liked: false,
               likes: 0
             }));
-            this.isLoading = false; 
+            this.isLoading = false;
           },
           (error) => {
             console.error(error);
             this.loadingError = true;
-            this.isLoading = false; 
+            this.isLoading = false;
           }
         );
       },
@@ -61,6 +65,10 @@ export class UserHomeComponent implements OnInit {
         this.isLoading = false;
       }
     );
+
+    this.postService.postCreated$.subscribe((newPost: Posts) => {
+      this.userPosts.unshift(newPost);
+    });
   }
 
   toggleLike(post: Posts) {
@@ -79,7 +87,7 @@ export class UserHomeComponent implements OnInit {
   openCommentsModal(postId: number) {
     this.loadComments(postId);
     this.isCommentsModalOpen = true;
-  }  
+  }
 
   closeCommentsModal() {
     this.isCommentsModalOpen = false;
@@ -97,35 +105,34 @@ export class UserHomeComponent implements OnInit {
         liked: false,
         image: '../../../assets/images/User.jpg',
       };
-  
+
       this.comments.push(newComment);
-  
+
       this.newComment = '';
-  
+
       setTimeout(() => {
         this.scrollToEndOfModal();
       });
     }
   }
-  
 
   scrollToEndOfModal() {
     const modalElement = this.commentsModal.nativeElement;
-  
+
     modalElement.scrollTop = modalElement.scrollHeight;
   }
 
   toggleCommentLike(comment: Comment) {
     comment.liked = !comment.liked;
-  
+
     if (comment.liked) {
-      comment.likes++; 
+      comment.likes++;
       localStorage.setItem(`comment_like_${comment.id}`, '1');
     } else {
-      comment.likes--; 
-      localStorage.removeItem(`comment_like_${comment.id}`); 
+      comment.likes--;
+      localStorage.removeItem(`comment_like_${comment.id}`);
     }
-  }  
+  }
 
   loadComments(postId: number) {
     this.homeService.getCommentsByPost(postId)
@@ -133,15 +140,15 @@ export class UserHomeComponent implements OnInit {
         response => {
           this.comments = response.map(comment => ({
             ...comment,
-            name: 'Usuário', 
-            likes: 0, 
-            liked: false, 
+            name: 'Usuário',
+            likes: 0,
+            liked: false,
           }));
         },
         error => console.error(error)
       );
-  }  
-  
+  }
+
   stopPropagation(event: Event) {
     event.stopPropagation();
   }

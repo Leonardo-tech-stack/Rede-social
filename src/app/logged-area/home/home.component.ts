@@ -3,6 +3,7 @@ import { HomeService } from './home.service';
 import { finalize, take } from 'rxjs/operators';
 import { Posts, Comment } from './home.interfaces';
 import User from 'src/app/shared/interfaces/user.interface';
+import { PostService } from 'src/app/shared/services/post-service/post-service.service';
 
 @Component({
   selector: 'app-home',
@@ -41,7 +42,10 @@ export class HomeComponent implements OnInit {
   isLoading: boolean = false;
   loadingError: boolean = false;
 
-  constructor(private homeService: HomeService) {}
+  constructor(
+    private homeService: HomeService,
+    private postService: PostService
+  ) {}
 
   ngOnInit() {
     this.loadingPosts();
@@ -57,6 +61,10 @@ export class HomeComponent implements OnInit {
       if (liked === '1') {
         comment.liked = true;
       }
+    });
+
+    this.postService.postCreated$.subscribe((newPost: Posts) => {
+      this.posts.unshift(newPost);
     });
   }
 
