@@ -27,10 +27,10 @@
                   </div>
                 </div>
                 <div *ngIf="post.showOptions" class="options-menu d-flex justify-content-end">
-                  <button class="ml-auto" (click)="savePost(post)" [disabled]="isPostSaved(post)">
+                  <button class="ml-auto" (click)="savePost(post)" [disabled]="isPostSaved(post) || !post.showSaveOption">
                     {{ isPostSaved(post) ? 'Post Salvo' : 'Salvar Post' }}
                   </button>
-                </div>
+                </div>                                           
                 <h6 class="card-title body">{{ post.title | capitalizeFirstLetter }}</h6>
                 <p class="card-text body">{{ post.body | capitalizeFirstLetter }}</p>
                 <section class="d-flex justify-content-between">

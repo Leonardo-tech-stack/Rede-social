@@ -266,6 +266,15 @@ export class HomeComponent implements OnInit {
 
   openOptions(post: Posts) {
     post.showOptions = !post.showOptions;
+    post.showSaveOption = !post.createdTimestamp || this.isPostNotRecentlyCreated(post);
+  }
+  
+  isPostNotRecentlyCreated(post: Posts): boolean {
+    const currentTime = new Date().getTime();
+    const timeDifference = currentTime - post.createdTimestamp!;
+    const recentlyCreatedThreshold = 60000; // 1 minuto em milissegundos
+  
+    return timeDifference >= recentlyCreatedThreshold;
   }
 
   savePost(post: Posts) {

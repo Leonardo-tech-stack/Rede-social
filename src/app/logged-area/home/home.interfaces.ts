@@ -8,7 +8,9 @@ export class Posts {
   likes: number;
   liked: boolean;
   showOptions: boolean;
+  showSaveOption?: boolean;
   user: User;
+  createdTimestamp?: number;
 
   constructor(data: any) {
     this.id = data.id || 0;

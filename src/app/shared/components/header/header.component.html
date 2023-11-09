@@ -5,34 +5,47 @@
                 <div class="header-content">
                     <ul [ngClass]="{'no-input': !showSearchInput}" class="nav-bar-list">
                         <li>
-                            <a class="home" (click)="redirectToHome(); scrollToTop()" routerLink="/" routerLinkActive="activated">
-                                <img class="img-consistence" [src]="home" alt="Início">
+                            <a class="home" (click)="redirectToHome(); scrollToTop()" routerLink="/" title="Início">
+                                <img class="img-consistence" [src]="home" alt="Voltar ao início">
                             </a>
                         </li>
                         <li class="d-flex align-items-center" *ngIf="showSearchInput">
                             <input type="text" [(ngModel)]="searchText" (input)="onSearchTextChange()" placeholder="Pesquisar por nome">
                         </li>
+                    </ul>
+
+                    <ul class="actions">
                         <li>
-                            <a class="friends" routerLink="/friends">
+                            <a routerLink="/home" routerLinkActive="active-link" 
+                                [routerLinkActiveOptions]="{ exact: true }" title="Início"
+                                (click)="redirectToHome(); scrollToTop()"
+                            >
+                                <img class="img-consistence" [src]="home" alt="Voltar ao início">
+                            </a>
+                        </li>
+                        <li>
+                            <a routerLink="/friends" routerLinkActive="active-link" 
+                                [routerLinkActiveOptions]="{ exact: true }" title="Amigos"
+                            >
                                 <img class="img-consistence" [src]="friendsNc" alt="Amigos">
                             </a>
                         </li>  
                         <li>
-                            <section class="create-post" (click)="openPostModal()" title="Postar">
+                            <div class="create-post" (click)="openPostModal()" title="Postar">
                                 <img class="img-consistence" [src]="createPost" alt="Criar Postagem">
-                            </section>
+                            </div>
                         </li>
                         <!-- <li>
                             <a routerLink="/friends">
                                 <img class="friends img-fluid" [src]="friends" alt="Friends">
                             </a>
-                        </li>                       -->
+                        </li>  -->
                     </ul>
                 </div>
             </div>
 
             <div class="col">
-                <ul class="user-1 nav-bar-list d-flex justify-content-end">
+                <ul class="user-1 d-flex justify-content-end">
                     <li class="d-flex align-items-center justify-content-end">
                         <img class="user" [src]="photo" (click)="openModal()" [alt]="userName">
                     </li>
