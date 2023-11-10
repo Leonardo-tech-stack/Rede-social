@@ -64,7 +64,7 @@
 </main>
 
 <!-- Modal de Comentários -->
-<section class="modal" *ngIf="isCommentsModalOpen" (click)="closeCommentsModal()" #commentsModal>
+<section class="modal" *ngIf="isCommentsModalOpen">
   <div class="modal-dialog" (click)="stopPropagation($event)">
     <div class="modal-content">
       <div class="modal-header">
@@ -83,23 +83,27 @@
             <p class="p-2">{{ comment.body | capitalizeFirstLetter }}</p>
             <div class="d-flex align-items-center">
               <button (click)="toggleCommentLike(comment)" class="btn btn-link">
-                <img class="like" [src]="comment.liked ? liked 
-                  : noLiked" alt="Curtir"
-                >
+                <img class="like" [src]="comment.liked ? liked : noLiked" alt="Curtir">
               </button>
               <span>{{ comment.likes }}</span>
             </div>
           </li>          
-        </ul>        
+        </ul>
+
         <div class="newComment form-group d-flex align-items-center">
           <img class="img-comment" [src]="userPhoto">
           <input type="text"
                  placeholder="Comentar..."
                  class="form-control m-2" [(ngModel)]="newComment"
                  (click)="stopPropagation($event)" (keydown.enter)="addNewComment()">
-        </div>               
+        </div>
+
+        <div class="no-comments-message" *ngIf="noComments">
+          <p>Nenhum comentário por enquanto.</p>
+        </div>
       </div>
     </div>
   </div>
 </section>
+
 <app-header (searchTextChanged)="filterPosts($event)"></app-header>

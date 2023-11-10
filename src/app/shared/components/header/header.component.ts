@@ -85,10 +85,11 @@ export class HeaderComponent {
   }
 
   openPostModal() {
-    const initialState = {
-    };
-
+    this.redirectToHome();
+  
+    const initialState = {};
     this.modalRef = this.modalService.show(CreatePostComponent, { initialState });
   }
+  
 
 }

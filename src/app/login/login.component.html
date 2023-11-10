@@ -1,3 +1,5 @@
+<!-- <app-login-header></app-login-header> -->
+
 <div class="text-center">
     <form #form="ngForm" (ngSubmit)="onSubmit(form)" class="form-signin pt-5">
         <div class="p-2">
@@ -7,7 +9,7 @@
             [ngClass]="showError('email', form) ? 'is-invalid' : ''"
             #emailInput>
 
-            <div *ngIf="showError('email', form)" class="invalid-feedback">E-mail inválido.</div>
+            <p *ngIf="showError('email', form)" class="invalid-feedback">E-mail inválido.</p>
         </div>
 
         <div class="p-2">
@@ -34,3 +36,28 @@
         </div>
     </form>
 </div>
+
+<div class="contact">
+    <div class="contact_1">
+        <div class="contact_1--1">
+            <a href="https://linkedin.com/in/leonardo-carvalho-3708bb260/" 
+            target="_blank" 
+            className="text-gray-400 hover:text-black" rel="noreferrer"
+            >
+                <img [src]="linkedin" alt="linkedin" />
+                <strong>LinkedIn</strong>
+            </a>
+        </div>
+
+        <div class="contact_1--1">
+            <a href="https://github.com/Leonardo-tech-stack" 
+            target="_blank" 
+            className="text-gray-400 hover:text-black" rel="noreferrer"
+            >
+                <img [src]="github" alt="github" />
+                <strong>Github</strong>
+            </a>
+        </div>
+    </div>
+</div>
+<p>Contato</p>

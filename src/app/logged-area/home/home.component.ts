@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
   userPhoto: string = "../../../assets/images/User.jpg";
   
   isCommentsModalOpen = false;
+  noComments = false;
   comments: Comment[] = [];
   newComment: string = '';
   isNewComments: boolean[] = [];
@@ -202,16 +203,21 @@ export class HomeComponent implements OnInit {
     this.homeService.getCommentsByPost(postId)
       .subscribe(
         response => {
-          this.comments = response.map(comment => ({
-            ...comment,
-            name: 'Usuário',
-            likes: 0, 
-            liked: false, 
-          }));
+          if (response.length === 0) {
+            this.noComments = true; 
+          } else {
+            this.comments = response.map(comment => ({
+              ...comment,
+              name: 'Usuário',
+              likes: 0, 
+              liked: false, 
+            }));
+            this.noComments = false; 
+          }
         },
         error => console.error(error)
       );
-  }  
+  }   
   
   addNewComment() {
     if (this.newComment.trim() !== '') {
@@ -272,7 +278,7 @@ export class HomeComponent implements OnInit {
   isPostNotRecentlyCreated(post: Posts): boolean {
     const currentTime = new Date().getTime();
     const timeDifference = currentTime - post.createdTimestamp!;
-    const recentlyCreatedThreshold = 60000; // 1 minuto em milissegundos
+    const recentlyCreatedThreshold = 60000; 
   
     return timeDifference >= recentlyCreatedThreshold;
   }

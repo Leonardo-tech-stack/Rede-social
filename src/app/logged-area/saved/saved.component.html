@@ -31,7 +31,8 @@
               </div>
             </div>
           </div>
-          <p class="card-text">{{ post.body | capitalizeFirstLetter }}</p>
+          <h6 class="card-title body">{{ post.title | capitalizeFirstLetter }}</h6>
+          <p class="card-text body">{{ post.body | capitalizeFirstLetter }}</p>
           <section class="d-flex justify-content-between">
             <div class="d-flex align-items-center">
               <button (click)="toggleLike(post)" class="like-button btn btn-link">

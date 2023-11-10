@@ -21,6 +21,9 @@ export class LoginComponent {
 
   loginError = false;
 
+  linkedin: string = "../../assets/images/linkedin.png";
+  github: string = "../../assets/images/github.png";
+
   constructor(
     private loginService: LoginService,
     private router: Router
@@ -30,14 +33,11 @@ export class LoginComponent {
 
     if (!form.valid) {
       form.controls.email.markAsTouched();
-      // função para esperar o usuario inserir e enviar o email de login, caso for invalido, retornar a mensagem de erro
 
       form.controls.password.markAsTouched();
-      //mesma coisa só que para a senha
 
       if(form.controls.email.invalid) {
         this.emailInput.nativeElement.focus();
-        // obs no viewchild
         return;
       }
 
@@ -73,7 +73,6 @@ export class LoginComponent {
     this.loginError = true;
   }
 
-  // função para validação de email senha (retorna msg de erro)
   showError(nomeControle: string, form: NgForm) {
     if (!form.controls[nomeControle]) {
 

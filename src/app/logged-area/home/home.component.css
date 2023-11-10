@@ -37,6 +37,13 @@ main {
   padding-right: 5px;
 }
 
+.no-comments-message {
+  text-align: center;
+  font-size: 16px;
+  color: #888;
+  margin: 20px 0; 
+}
+
 .share {
   max-width: 100%;
   height: auto;
